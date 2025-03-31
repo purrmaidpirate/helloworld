@@ -16,19 +16,22 @@ h1 {
 }
 
 .layout {
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+    grid-template-rows: repeat(3, 1fr);    /* 3 equal rows */
+    gap: 8px; /* Space between the boxes */
+    max-width: 600px; /* Maximum width */
     margin-top: 20px;
 }
 
 .layout div {
     background: #333;
     color: white;
-    padding: 20px;
-    font-size: 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 1.5rem;
     border-radius: 5px;
+    height: 100%; /* Full height for grid rows */
 }

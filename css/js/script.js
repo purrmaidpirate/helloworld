@@ -19,9 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.addEventListener('mousemove', mouseMoveHandler);
         document.addEventListener('mouseup', mouseUpHandler);
         
-        // Add active class to resizer
-        resizer.classList.add('active');
-        
         // Prevent text selection during drag
         document.body.style.userSelect = 'none';
     };
@@ -35,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const newSidebarWidth = sidebarWidth + dx;
         
         // Apply constraints (min and max width)
-        if (newSidebarWidth >= 200 && newSidebarWidth <= window.innerWidth * 0.4) {
+        if (newSidebarWidth >= 300 && newSidebarWidth <= window.innerWidth * 0.5) {
             sidebar.style.width = `${newSidebarWidth}px`;
         }
     };
@@ -45,9 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Remove event listeners
         document.removeEventListener('mousemove', mouseMoveHandler);
         document.removeEventListener('mouseup', mouseUpHandler);
-        
-        // Remove active class from resizer
-        resizer.classList.remove('active');
         
         // Restore text selection
         document.body.style.userSelect = '';
@@ -63,15 +57,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         document.addEventListener('touchmove', touchMoveHandler);
         document.addEventListener('touchend', touchEndHandler);
-        
-        resizer.classList.add('active');
     });
     
     const touchMoveHandler = function(e) {
         const dx = e.touches[0].clientX - x;
         const newSidebarWidth = sidebarWidth + dx;
         
-        if (newSidebarWidth >= 200 && newSidebarWidth <= window.innerWidth * 0.4) {
+        if (newSidebarWidth >= 300 && newSidebarWidth <= window.innerWidth * 0.5) {
             sidebar.style.width = `${newSidebarWidth}px`;
         }
     };
@@ -79,15 +71,5 @@ document.addEventListener('DOMContentLoaded', function() {
     const touchEndHandler = function() {
         document.removeEventListener('touchmove', touchMoveHandler);
         document.removeEventListener('touchend', touchEndHandler);
-        
-        resizer.classList.remove('active');
     };
-    
-    // Handle window resize
-    window.addEventListener('resize', function() {
-        // Reset sidebar width if it exceeds max width after window resize
-        if (sidebar.offsetWidth > window.innerWidth * 0.4) {
-            sidebar.style.width = `${window.innerWidth * 0.4}px`;
-        }
-    });
 });

@@ -3,51 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ranjani's Portfolio</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Portfolio Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            height: 100%;
+            background-color: #f0f0f0;
+            padding: 2rem;
+            overflow-y: auto;
+            min-width: 300px;
+            max-width: 50%;
+            flex-shrink: 0;
+        }
+
+        .sidebar h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        /* Resize Handle */
+        .resize-handle {
+            width: 10px;
+            height: 100%;
+            background-color: #ccc;
+            cursor: col-resize;
+            flex-shrink: 0;
+            transition: background-color 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .resize-handle:hover {
+            background-color: #999;
+        }
+
+        .resize-handle::before {
+            content: "";
+            width: 2px;
+            height: 30px;
+            background-color: #666;
+        }
+
+        /* Gallery Section */
+        .gallery-container {
+            height: 100%;
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            background-color: #fff;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            padding-bottom: 2rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1/1;
+            background-color: #e0e0e0;
+            border: 1px solid #ccc;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+
+        /* For demo purposes - replace with your actual images */
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Left sidebar (static) -->
-        <aside id="sidebar">
-            <h1>Ranjani</h1>
-            <div class="sidebar-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                
-                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                
-                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                
-                <div class="spacer"></div>
-                
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                
-                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            </div>
-        </aside>
-        
-        <!-- Resizer element -->
-        <div id="resizer" class="resizer"></div>
-        
-        <!-- Right content area (scrollable portfolio) -->
-        <main id="content">
-            <div class="gallery">
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-            </div>
-        </main>
+    <!-- Left Sidebar -->
+    <div class="sidebar">
+        <h1>Ranjani</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
     </div>
 
-    <script src="js/script.js"></script>
+    <!-- Resize Handle -->
+    <div class="resize-handle" id="resize-handle"></div>
+
+    <!-- Right Gallery Section -->
+    <div class="gallery-container">
+        <div class="gallery-grid">
+            <!-- Gallery items (12 placeholders) -->
+            <div class="gallery-item"><img src="/api/placeholder/400/400" alt="Portfolio item"></div>
+            <div class="gallery-item"><img src="/api/placeholder/400/400" alt="Portfolio item"></div>
+            <div class="gallery-item"><img src="/api/placeholder/400/400" alt="Portfolio item"></div>
+            <div class="gallery-item"><img src="/api/placeholder/400/400" alt="Portfolio item"></div>
+            <div class="gallery-item"><img src="/api/placeholder/400/400" alt="Portfolio item"></div>
+            <div class="gallery-item"><img src="/api/placeholder/400/400" alt="Portfolio item"></div>
+            <div class="gallery-item"><img src="/api/placeholder/400/400" alt="Portfolio item"></div>
+            <div class="gallery-item"><img src="/api/placeholder/400/400" alt="Portfolio item"></div>
+            <div class="gallery-item"><img src="/api/placeholder/400/400" alt="Portfolio item"></div>
+            <div class="gallery-item"><img src="/api/placeholder/400/400" alt="Portfolio item"></div>
+            <div class="gallery-item"><img src="/api/placeholder/400/400" alt="Portfolio item"></div>
+            <div class="gallery-item"><img src="/api/placeholder/400/400" alt="Portfolio item"></div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for resize functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const resizeHandle = document.getElementById('resize-handle');
+            const sidebar = document.querySelector('.sidebar');
+            const galleryContainer = document.querySelector('.gallery-container');
+            let isResizing = false;
+            
+            // Mouse events for desktop
+            resizeHandle.addEventListener('mousedown', function(e) {
+                isResizing = true;
+                document.body.style.cursor = 'col-resize';
+                e.preventDefault();
+            });
+            
+            document.addEventListener('mousemove', function(e) {
+                if (!isResizing) return;
+                
+                const newWidth = e.clientX;
+                const windowWidth = window.innerWidth;
+                
+                // Set min and max width constraints
+                if (newWidth > 200 && newWidth < windowWidth * 0.7) {
+                    sidebar.style.width = newWidth + 'px';
+                    
+                    // Optionally, adjust gallery grid columns based on remaining space
+                    const remainingWidth = windowWidth - newWidth - 10; // 10px is the handle width
+                    const columns = Math.floor(remainingWidth / 220); // 200px min-width + 20px gap
+                    
+                    document.documentElement.style.setProperty(
+                        '--gallery-columns', 
+                        Math.max(1, columns)
+                    );
+                }
+            });
+            
+            document.addEventListener('mouseup', function() {
+                isResizing = false;
+                document.body.style.cursor = 'default';
+            });
+            
+            // Touch events for mobile
+            resizeHandle.addEventListener('touchstart', function(e) {
+                isResizing = true;
+                e.preventDefault();
+            });
+            
+            document.addEventListener('touchmove', function(e) {
+                if (!isResizing) return;
+                
+                const touch = e.touches[0];
+                const newWidth = touch.clientX;
+                const windowWidth = window.innerWidth;
+                
+                if (newWidth > 200 && newWidth < windowWidth * 0.7) {
+                    sidebar.style.width = newWidth + 'px';
+                }
+            });
+            
+            document.addEventListener('touchend', function() {
+                isResizing = false;
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                // Reset sidebar width if it exceeds constraints after window resize
+                const windowWidth = window.innerWidth;
+                const sidebarWidth = sidebar.offsetWidth;
+                
+                if (sidebarWidth > windowWidth * 0.7) {
+                    sidebar.style.width = (windowWidth * 0.7) + 'px';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

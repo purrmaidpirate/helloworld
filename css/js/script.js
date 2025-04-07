@@ -1,75 +1,69 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const resizer = document.getElementById('resizer');
-    const sidebar = document.getElementById('sidebar');
-    const content = document.getElementById('content');
-    
-    // Initial width of the sidebar
-    let sidebarWidth = sidebar.offsetWidth;
-    let x = 0;
-    
-    // Function to handle mouse down event on resizer
-    const mouseDownHandler = function(e) {
-        // Get the current mouse position
-        x = e.clientX;
-        
-        // Store the initial sidebar width
-        sidebarWidth = sidebar.offsetWidth;
-        
-        // Add event listeners for mouse move and mouse up
-        document.addEventListener('mousemove', mouseMoveHandler);
-        document.addEventListener('mouseup', mouseUpHandler);
-        
-        // Prevent text selection during drag
-        document.body.style.userSelect = 'none';
-    };
-    
-    // Function to handle mouse move event
-    const mouseMoveHandler = function(e) {
-        // Calculate how far the mouse has been moved
-        const dx = e.clientX - x;
-        
-        // Update the sidebar width
-        const newSidebarWidth = sidebarWidth + dx;
-        
-        // Apply constraints (min and max width)
-        if (newSidebarWidth >= 300 && newSidebarWidth <= window.innerWidth * 0.5) {
-            sidebar.style.width = `${newSidebarWidth}px`;
-        }
-    };
-    
-    // Function to handle mouse up event
-    const mouseUpHandler = function() {
-        // Remove event listeners
-        document.removeEventListener('mousemove', mouseMoveHandler);
-        document.removeEventListener('mouseup', mouseUpHandler);
-        
-        // Restore text selection
-        document.body.style.userSelect = '';
-    };
-    
-    // Add event listener for mouse down on resizer
-    resizer.addEventListener('mousedown', mouseDownHandler);
-    
-    // Handle touch events for mobile devices
-    resizer.addEventListener('touchstart', function(e) {
-        x = e.touches[0].clientX;
-        sidebarWidth = sidebar.offsetWidth;
-        
-        document.addEventListener('touchmove', touchMoveHandler);
-        document.addEventListener('touchend', touchEndHandler);
-    });
-    
-    const touchMoveHandler = function(e) {
-        const dx = e.touches[0].clientX - x;
-        const newSidebarWidth = sidebarWidth + dx;
-        
-        if (newSidebarWidth >= 300 && newSidebarWidth <= window.innerWidth * 0.5) {
-            sidebar.style.width = `${newSidebarWidth}px`;
-        }
-    };
-    
-    const touchEndHandler = function() {
-        document.removeEventListener('touchmove', touchMoveHandler);
-        document.removeEventListener('touchend', touchEndHandler);
-    };
-});
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Left Sidebar -->
+    <div class="sidebar">
+        <h1>Ranjani</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+
+    <!-- Resize Handle -->
+    <div class="resize-handle" id="resize-handle"></div>
+
+    <!-- Right Gallery Section -->
+    <div class="gallery-container">
+        <div class="gallery-grid">
+            <!-- Gallery items (12 placeholders) -->
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400" alt="Portfolio item">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400" alt="Portfolio item">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400" alt="Portfolio item">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400" alt="Portfolio item">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400" alt="Portfolio item">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400" alt="Portfolio item">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400" alt="Portfolio item">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400" alt="Portfolio item">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400" alt="Portfolio item">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400" alt="Portfolio item">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400" alt="Portfolio item">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400" alt="Portfolio item">
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

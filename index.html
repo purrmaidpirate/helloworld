@@ -116,11 +116,15 @@
         }
 
         .gallery-item a {
-            display: block;
+            display: flex;
             width: 100%;
             height: 100%;
             text-decoration: none;
-            color: inherit;
+            color: #333;
+            font-size: 2rem;
+            font-weight: bold;
+            justify-content: center;
+            align-items: center;
         }
 
         .gallery-item img {
@@ -150,17 +154,11 @@
         .gallery-item:nth-child(17) { background-color: #ffffff; }
         .gallery-item:nth-child(18) { background-color: #ffffff; }
         
-        /* Add text/numbers to the gallery items to make them more identifiable */
+        /* Add numbers to the gallery items to make them more identifiable */
         .gallery-item::after {
-            content: attr(data-id);
+            content: "";
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2rem;
-            font-weight: bold;
-            color: #333;
-            pointer-events: none; /* Ensure this doesn't interfere with clicks */
+            pointer-events: none;
         }
     </style>
 </head>
@@ -190,24 +188,24 @@
         
         <!-- Scrollable Gallery Grid -->
         <div class="gallery-grid" id="gallery-grid">
-            <div class="gallery-item" data-id="1"><a href="project1.html" title="Project 1"></a></div>
-            <div class="gallery-item" data-id="2"><a href="project2.html" title="Project 2"></a></div>
-            <div class="gallery-item" data-id="3"><a href="project3.html" title="Project 3"></a></div>
-            <div class="gallery-item" data-id="4"><a href="project4.html" title="Project 4"></a></div>
-            <div class="gallery-item" data-id="5"><a href="project5.html" title="Project 5"></a></div>
-            <div class="gallery-item" data-id="6"><a href="project6.html" title="Project 6"></a></div>
-            <div class="gallery-item" data-id="7"><a href="project7.html" title="Project 7"></a></div>
-            <div class="gallery-item" data-id="8"><a href="project8.html" title="Project 8"></a></div>
-            <div class="gallery-item" data-id="9"><a href="project9.html" title="Project 9"></a></div>
-            <div class="gallery-item" data-id="10"><a href="project10.html" title="Project 10"></a></div>
-            <div class="gallery-item" data-id="11"><a href="project11.html" title="Project 11"></a></div>
-            <div class="gallery-item" data-id="12"><a href="project12.html" title="Project 12"></a></div>
-            <div class="gallery-item" data-id="13"><a href="project13.html" title="Project 13"></a></div>
-            <div class="gallery-item" data-id="14"><a href="project14.html" title="Project 14"></a></div>
-            <div class="gallery-item" data-id="15"><a href="project15.html" title="Project 15"></a></div>
-            <div class="gallery-item" data-id="16"><a href="project16.html" title="Project 16"></a></div>
-            <div class="gallery-item" data-id="17"><a href="project17.html" title="Project 17"></a></div>
-            <div class="gallery-item" data-id="18"><a href="project18.html" title="Project 18"></a></div>
+            <div class="gallery-item" data-id="1"><a href="project1.html" title="Project 1">1</a></div>
+            <div class="gallery-item" data-id="2"><a href="project2.html" title="Project 2">2</a></div>
+            <div class="gallery-item" data-id="3"><a href="project3.html" title="Project 3">3</a></div>
+            <div class="gallery-item" data-id="4"><a href="project4.html" title="Project 4">4</a></div>
+            <div class="gallery-item" data-id="5"><a href="project5.html" title="Project 5">5</a></div>
+            <div class="gallery-item" data-id="6"><a href="project6.html" title="Project 6">6</a></div>
+            <div class="gallery-item" data-id="7"><a href="project7.html" title="Project 7">7</a></div>
+            <div class="gallery-item" data-id="8"><a href="project8.html" title="Project 8">8</a></div>
+            <div class="gallery-item" data-id="9"><a href="project9.html" title="Project 9">9</a></div>
+            <div class="gallery-item" data-id="10"><a href="project10.html" title="Project 10">10</a></div>
+            <div class="gallery-item" data-id="11"><a href="project11.html" title="Project 11">11</a></div>
+            <div class="gallery-item" data-id="12"><a href="project12.html" title="Project 12">12</a></div>
+            <div class="gallery-item" data-id="13"><a href="project13.html" title="Project 13">13</a></div>
+            <div class="gallery-item" data-id="14"><a href="project14.html" title="Project 14">14</a></div>
+            <div class="gallery-item" data-id="15"><a href="project15.html" title="Project 15">15</a></div>
+            <div class="gallery-item" data-id="16"><a href="project16.html" title="Project 16">16</a></div>
+            <div class="gallery-item" data-id="17"><a href="project17.html" title="Project 17">17</a></div>
+            <div class="gallery-item" data-id="18"><a href="project18.html" title="Project 18">18</a></div>
         </div>
     </div>
 </body>

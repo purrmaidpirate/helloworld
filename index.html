@@ -15,9 +15,14 @@
         /* Custom Cursor Styles */
         body {
             display: flex;
-            height: 300vh;
+            height: 100vh;
             overflow: hidden;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path d="M0,0 L2,0 L2,2 L4,2 L4,4 L6,4 L6,6 L8,6 L8,8 L10,8 L10,10 L12,10 L12,12 L14,12 L14,14 L16,14 L16,16 L18,16 L18,14 L20,14 L20,16 L22,16 L22,18 L24,18 L24,20 L22,20 L22,22 L20,22 L20,24 L18,24 L18,26 L16,26 L16,24 L14,24 L14,22 L12,22 L12,20 L10,20 L10,16 L8,16 L8,20 L6,20 L6,18 L4,18 L4,16 L0,16 Z" fill="black"/></svg>') 0 0, auto;
+            cursor: url('cursor.png'), auto;
+        }
+        
+        /* For clickable elements, you can optionally use a different cursor state */
+        a, .gallery-item {
+            cursor: url('cursor.png'), pointer;
         }
         
         /* Hide the custom cursor div since we're using CSS cursor property */
@@ -99,7 +104,6 @@
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            grid-auto-rows: minmax(250px, 1fr);
             gap: 30px;
             padding: 30px;
             position: relative;
@@ -112,6 +116,7 @@
             border: 1px solid #000;
             background-color: white;
             aspect-ratio: 1 / 1;
+            min-height: 200px; /* Minimum height to prevent too small squares */
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -121,6 +126,7 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
+        /* Add text/numbers to the gallery items to make them more identifiable */
         .gallery-item a {
             display: flex;
             width: 100%;
@@ -160,7 +166,7 @@
         .gallery-item:nth-child(17) { background-color: #ffffff; }
         .gallery-item:nth-child(18) { background-color: #ffffff; }
         
-        /* Add numbers to the gallery items to make them more identifiable */
+        /* Add text/numbers to the gallery items to make them more identifiable */
         .gallery-item::after {
             content: "";
             position: absolute;
@@ -220,8 +226,35 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // No custom cursor JavaScript needed
-            // The cursor is handled via CSS
+            // Handle responsive grid sizing
+            function adjustGridSizes() {
+                const contentArea = document.getElementById('content-area');
+                const contentWidth = contentArea.offsetWidth;
+                const gallery = document.getElementById('gallery-grid');
+                
+                // Set minimum size based on available width
+                if (contentWidth < 600) {
+                    // For very small screens, we might want to drop to 2 columns
+                    gallery.style.gridTemplateColumns = 'repeat(2, 1fr)';
+                } else {
+                    // Otherwise stick to 3 columns
+                    gallery.style.gridTemplateColumns = 'repeat(3, 1fr)';
+                }
+                
+                // Calculate and set item size to ensure squares aren't too small
+                const items = document.querySelectorAll('.gallery-item');
+                items.forEach(item => {
+                    // Set minimum height to ensure they're not too small
+                    const minSize = Math.max(200, contentWidth / 4);
+                    item.style.minHeight = minSize + 'px';
+                });
+            }
+            
+            // Initial adjustment
+            adjustGridSizes();
+            
+            // Adjust on window resize
+            window.addEventListener('resize', adjustGridSizes);
         });
     </script>
 </body>

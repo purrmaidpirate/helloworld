@@ -1,69 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Website</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <!-- Left Sidebar -->
-    <div class="sidebar">
-        <h1>Ranjani</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-
-    <!-- Resize Handle -->
-    <div class="resize-handle" id="resize-handle"></div>
-
-    <!-- Right Gallery Section -->
-    <div class="gallery-container">
-        <div class="gallery-grid">
-            <!-- Gallery items (12 placeholders) -->
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/400" alt="Portfolio item">
-            </div>
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/400" alt="Portfolio item">
-            </div>
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/400" alt="Portfolio item">
-            </div>
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/400" alt="Portfolio item">
-            </div>
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/400" alt="Portfolio item">
-            </div>
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/400" alt="Portfolio item">
-            </div>
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/400" alt="Portfolio item">
-            </div>
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/400" alt="Portfolio item">
-            </div>
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/400" alt="Portfolio item">
-            </div>
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/400" alt="Portfolio item">
-            </div>
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/400" alt="Portfolio item">
-            </div>
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/400" alt="Portfolio item">
-            </div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
+document.addEventListener('DOMContentLoaded', function() {
+    const resizeHandle = document.getElementById('resize-handle');
+    const sidebar = document.getElementById('sidebar');
+    const contentArea = document.getElementById('content-area');
+    let isResizing = false;
+    
+    // Mouse events for desktop
+    resizeHandle.addEventListener('mousedown', function(e) {
+        isResizing = true;
+        resizeHandle.classList.add('active');
+        document.body.style.cursor = 'col-resize';
+        e.preventDefault();
+    });
+    
+    document.addEventListener('mousemove', function(e) {
+        if (!isResizing) return;
+        
+        const newWidth = e.clientX;
+        
+        if (newWidth > 200 && newWidth < window.innerWidth * 0.7) {
+            // Update sidebar width
+            sidebar.style.width = newWidth + 'px';
+            
+            // Update resize handle position
+            resizeHandle.style.left = newWidth + 'px';
+            
+            // Update content area margin and width
+            contentArea.style.marginLeft = (newWidth + 10) + 'px';
+            contentArea.style.width = `calc(100% - ${newWidth + 10}px)`;
+        }
+    });
+    
+    document.addEventListener('mouseup', function() {
+        isResizing = false;
+        resizeHandle.classList.remove('active');
+        document.body.style.cursor = 'default';
+    });
+    
+    // Touch events for mobile
+    resizeHandle.addEventListener('touchstart', function(e) {
+        isResizing = true;
+        resizeHandle.classList.add('active');
+        e.preventDefault();
+    });
+    
+    document.addEventListener('touchmove', function(e) {
+        if (!isResizing) return;
+        
+        const touch = e.touches[0];
+        const newWidth = touch.clientX;
+        
+        if (newWidth > 200 && newWidth < window.innerWidth * 0.7) {
+            // Update sidebar width
+            sidebar.style.width = newWidth + 'px';
+            
+            // Update resize handle position
+            resizeHandle.style.left = newWidth + 'px';
+            
+            // Update content area margin and width
+            contentArea.style.marginLeft = (newWidth + 10) + 'px';
+            contentArea.style.width = `calc(100% - ${newWidth + 10}px)`;
+        }
+    });
+    
+    document.addEventListener('touchend', function() {
+        isResizing = false;
+        resizeHandle.classList.remove('active');
+    });
+});

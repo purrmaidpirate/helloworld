@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project [Number] - Ranjani Ramakrishnan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            cursor: url('cursor.png'), auto;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            margin-bottom: 2rem;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            text-decoration: none;
+            color: #333;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .project-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .project-images {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .project-images img {
+            width: 100%;
+            height: auto;
+        }
+        
+        .project-details {
+            padding: 1rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .project-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-link">← Back to Portfolio</a>
+            <h1>Project [Number] Title</h1>
+        </header>
+        
+        <div class="project-content">
+            <div class="project-images">
+                <img src="project[number]_image1.jpg" alt="Project image">
+                <img src="project[number]_image2.jpg" alt="Project image">
+                <!-- Add more images as needed -->
+            </div>
+            
+            <div class="project-details">
+                <h2>About this project</h2>
+                <p>Detailed description of the project goes here. Explain the concept, your role, the technologies used, and any other relevant information.</p>
+                
+                <h3>Project Details</h3>
+                <ul>
+                    <li><strong>Date:</strong> Month Year</li>
+                    <li><strong>Client:</strong> Client Name</li>
+                    <li><strong>Role:</strong> Your Role</li>
+                    <li><strong>Technologies:</strong> Tech Used</li>
+                </ul>
+                
+                <h3>Project Process</h3>
+                <p>Describe your process, from initial concept to final execution. What challenges did you face? How did you overcome them?</p>
+                
+                <!-- Add more sections as needed -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

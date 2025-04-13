@@ -29,6 +29,8 @@
             left: 0;
             top: 0;
             bottom: 0;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            z-index: 100;
         }
 
         .sidebar h1 {
@@ -41,70 +43,69 @@
             line-height: 1.5;
         }
 
-        /* Resize Handle */
-        .resize-handle {
-            position: fixed;
-            left: 350px;
-            top: 0;
-            bottom: 0;
-            width: 10px;
-            height: 100%;
-            background-color: #ccc;
-            cursor: col-resize;
-            z-index: 100;
-        }
-
-        .resize-handle:hover, .resize-handle.active {
-            background-color: #999;
-        }
-
         /* Right Content Area */
         .content-area {
-            margin-left: 360px; /* sidebar width + resize handle */
-            width: calc(100% - 360px);
+            margin-left: 350px; /* sidebar width */
+            width: calc(100% - 350px);
             height: 100%;
             overflow: auto;
             position: relative;
         }
 
         /* Fixed Grid Background */
-        .content-area {
+        .content-area::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 350px;
+            z-index: 0;
             background-image: 
                 linear-gradient(to right, #000 1px, transparent 1px),
                 linear-gradient(to bottom, #000 1px, transparent 1px);
             background-size: 60px 60px; /* Fixed square cell size */
             background-position: 0 0;
+            pointer-events: none;
         }
 
-        /* Dynamic Responsive Gallery */
+        /* Fixed 3x3 Grid Overlay */
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 350px;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 0;
+            pointer-events: none;
+        }
+
+        .grid-cell {
+            /* No border */
+        }
+
+        /* Scrollable Gallery Content */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            grid-auto-rows: 1fr;
-            gap: 60px;
-            padding: 60px;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: minmax(250px, 1fr);
+            gap: 30px;
+            padding: 30px;
             position: relative;
             z-index: 10;
         }
 
         /* Make items square */
-        .gallery-grid::before {
-            content: '';
-            width: 0;
-            padding-bottom: 100%;
-            grid-row: 1 / 1;
-            grid-column: 1 / 1;
-        }
-
-        .gallery-grid > *:first-child {
-            grid-row: 1 / 1;
-            grid-column: 1 / 1;
-        }
-
         .gallery-item {
             position: relative;
             border: 1px solid #000;
             background-color: white;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
         }
 
         .gallery-item img {
@@ -124,10 +125,31 @@
         .gallery-item:nth-child(7) { background-color: #e5e5e5; }
         .gallery-item:nth-child(8) { background-color: #d5d5d5; }
         .gallery-item:nth-child(9) { background-color: #c5c5c5; }
+        .gallery-item:nth-child(10) { background-color: #f5f5f5; }
+        .gallery-item:nth-child(11) { background-color: #e5e5e5; }
+        .gallery-item:nth-child(12) { background-color: #d5d5d5; }
+        .gallery-item:nth-child(13) { background-color: #eaeaea; }
+        .gallery-item:nth-child(14) { background-color: #dadada; }
+        .gallery-item:nth-child(15) { background-color: #cacaca; }
+        .gallery-item:nth-child(16) { background-color: #e2e2e2; }
+        .gallery-item:nth-child(17) { background-color: #d2d2d2; }
+        .gallery-item:nth-child(18) { background-color: #c2c2c2; }
+        
+        /* Add text/numbers to the gallery items to make them more identifiable */
+        .gallery-item::after {
+            content: attr(data-id);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+        }
     </style>
 </head>
 <body>
-    <!-- Left Sidebar -->
+    <!-- Left Sidebar (Static) -->
     <div class="sidebar" id="sidebar">
         <h1>Ranjani Ramakrishnan</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -135,126 +157,42 @@
         <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
     </div>
 
-    <!-- Resize Handle -->
-    <div class="resize-handle" id="resize-handle"></div>
-
     <!-- Right Content Area with Fixed Grid -->
     <div class="content-area" id="content-area">
-        <!-- Dynamic Gallery Grid on top of the static background grid -->
+        <!-- Fixed 3x3 Grid Overlay -->
+        <div class="grid-overlay">
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+        </div>
+        
+        <!-- Scrollable Gallery Grid -->
         <div class="gallery-grid" id="gallery-grid">
-            <div class="gallery-item"></div>
-            <div class="gallery-item"></div>
-            <div class="gallery-item"></div>
-            <div class="gallery-item"></div>
-            <div class="gallery-item"></div>
-            <div class="gallery-item"></div>
-            <div class="gallery-item"></div>
-            <div class="gallery-item"></div>
-            <div class="gallery-item"></div>
+            <div class="gallery-item" data-id="1"></div>
+            <div class="gallery-item" data-id="2"></div>
+            <div class="gallery-item" data-id="3"></div>
+            <div class="gallery-item" data-id="4"></div>
+            <div class="gallery-item" data-id="5"></div>
+            <div class="gallery-item" data-id="6"></div>
+            <div class="gallery-item" data-id="7"></div>
+            <div class="gallery-item" data-id="8"></div>
+            <div class="gallery-item" data-id="9"></div>
+            <div class="gallery-item" data-id="10"></div>
+            <div class="gallery-item" data-id="11"></div>
+            <div class="gallery-item" data-id="12"></div>
+            <div class="gallery-item" data-id="13"></div>
+            <div class="gallery-item" data-id="14"></div>
+            <div class="gallery-item" data-id="15"></div>
+            <div class="gallery-item" data-id="16"></div>
+            <div class="gallery-item" data-id="17"></div>
+            <div class="gallery-item" data-id="18"></div>
         </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const resizeHandle = document.getElementById('resize-handle');
-            const sidebar = document.getElementById('sidebar');
-            const contentArea = document.getElementById('content-area');
-            const galleryGrid = document.getElementById('gallery-grid');
-            let isResizing = false;
-            
-            // Function to update gallery layout based on available width
-            function updateGalleryLayout() {
-                const contentWidth = contentArea.offsetWidth;
-                
-                // Dynamically adjust gallery columns based on available width
-                if (contentWidth < 600) {
-                    galleryGrid.style.gridTemplateColumns = 'repeat(1, 1fr)';
-                } else if (contentWidth < 900) {
-                    galleryGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
-                } else if (contentWidth < 1200) {
-                    galleryGrid.style.gridTemplateColumns = 'repeat(3, 1fr)';
-                } else {
-                    galleryGrid.style.gridTemplateColumns = 'repeat(4, 1fr)';
-                }
-            }
-            
-            // Initial layout update
-            updateGalleryLayout();
-            
-            // Mouse events for desktop
-            resizeHandle.addEventListener('mousedown', function(e) {
-                isResizing = true;
-                resizeHandle.classList.add('active');
-                document.body.style.cursor = 'col-resize';
-                e.preventDefault();
-            });
-            
-            document.addEventListener('mousemove', function(e) {
-                if (!isResizing) return;
-                
-                const newWidth = e.clientX;
-                
-                if (newWidth > 200 && newWidth < window.innerWidth * 0.7) {
-                    // Update sidebar width
-                    sidebar.style.width = newWidth + 'px';
-                    
-                    // Update resize handle position
-                    resizeHandle.style.left = newWidth + 'px';
-                    
-                    // Update content area margin and width
-                    contentArea.style.marginLeft = (newWidth + 10) + 'px';
-                    contentArea.style.width = `calc(100% - ${newWidth + 10}px)`;
-                    
-                    // Update gallery layout
-                    updateGalleryLayout();
-                }
-            });
-            
-            document.addEventListener('mouseup', function() {
-                isResizing = false;
-                resizeHandle.classList.remove('active');
-                document.body.style.cursor = 'default';
-            });
-            
-            // Touch events for mobile
-            resizeHandle.addEventListener('touchstart', function(e) {
-                isResizing = true;
-                resizeHandle.classList.add('active');
-                e.preventDefault();
-            });
-            
-            document.addEventListener('touchmove', function(e) {
-                if (!isResizing) return;
-                
-                const touch = e.touches[0];
-                const newWidth = touch.clientX;
-                
-                if (newWidth > 200 && newWidth < window.innerWidth * 0.7) {
-                    // Update sidebar width
-                    sidebar.style.width = newWidth + 'px';
-                    
-                    // Update resize handle position
-                    resizeHandle.style.left = newWidth + 'px';
-                    
-                    // Update content area margin and width
-                    contentArea.style.marginLeft = (newWidth + 10) + 'px';
-                    contentArea.style.width = `calc(100% - ${newWidth + 10}px)`;
-                    
-                    // Update gallery layout
-                    updateGalleryLayout();
-                }
-            });
-            
-            document.addEventListener('touchend', function() {
-                isResizing = false;
-                resizeHandle.classList.remove('active');
-            });
-            
-            // Handle window resize
-            window.addEventListener('resize', function() {
-                updateGalleryLayout();
-            });
-        });
-    </script>
 </body>
 </html>

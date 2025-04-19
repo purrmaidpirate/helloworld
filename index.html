@@ -17,17 +17,12 @@
             display: flex;
             height: 100vh;
             overflow: hidden;
-            cursor: url('vector.png'), auto;
+            cursor: url('vector.png') 16 16, auto; /* Added hotspot coordinates */
         }
         
         /* For clickable elements, you can optionally use a different cursor state */
         a, .gallery-item {
-            cursor: url('vector.png'), pointer;
-        }
-        
-        /* Hide the custom cursor div since we're using CSS cursor property */
-        .custom-cursor {
-            display: none;
+            cursor: url('vector.png') 16 16, pointer; /* Added hotspot coordinates */
         }
 
         /* Static Left Panel */
@@ -175,9 +170,6 @@
     </style>
 </head>
 <body>
-    <!-- Custom Cursor -->
-    <div class="custom-cursor" id="custom-cursor"></div>
-
     <!-- Left Sidebar (Static) -->
     <div class="sidebar" id="sidebar">
         <h1>Ranjani Ramakrishnan</h1>

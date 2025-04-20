@@ -10,8 +10,26 @@ body {
     display: flex;
     height: 100vh;
     overflow: hidden;
+    cursor: none;
 }
 
+
+a, .gallery-item {
+    cursor: none; /* Hide default cursor on clickable elements too */
+}
+
+/* Custom cursor styling */
+.custom-cursor {
+    position: fixed;
+    width: 64px; /* Adjust size as needed (larger than the standard 32px) */
+    height: 64px; /* Adjust size as needed (larger than the standard 32px) */
+    background-image: url('css/js/img/vector1.png');
+    background-size: contain; /* Scale image to fit the element */
+    background-repeat: no-repeat;
+    pointer-events: none; /* So it doesn't interfere with clicking */
+    z-index: 9999; /* Make sure it's always on top */
+    transform: translate(-50%, -50%); /* Center the cursor */
+}
 /* Static Left Panel */
 .sidebar {
     height: 100%;

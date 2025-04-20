@@ -3,6 +3,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const sidebar = document.getElementById('sidebar');
     const contentArea = document.getElementById('content-area');
     let isResizing = false;
+    // Custom cursor functionality
+const cursor = document.getElementById('custom-cursor');
+
+document.addEventListener('mousemove', function(e) {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+});
     
     // Mouse events for desktop
     resizeHandle.addEventListener('mousedown', function(e) {

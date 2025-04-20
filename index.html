@@ -4,46 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ranjani Ramakrishnan - Portfolio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        /* Custom Cursor Styles */
-        body {
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-            cursor: none; /* Hide the default cursor */
-        }
-        
-        /* Custom cursor styling */
-        .custom-cursor {
-            position: fixed;
-            width: 64px; /* Make it larger */
-            height: 64px; /* Make it larger */
-            background-image: url('css/js/img/vector1.png');
-            background-size: contain; /* Scale image to fit */
-            background-repeat: no-repeat;
-            pointer-events: none; /* Let clicks pass through */
-            z-index: 9999; /* Keep it on top */
-            transform: translate(-50%, -50%); /* Center cursor */
-        }
-        
-        /* Commented out for now, can uncomment if needed */
-        a, .gallery-item {
-            cursor: none; /* Hide default cursor on clickable elements too */
-        }
-        
-        /* Rest of your CSS remains unchanged */
-        /* ... */
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Custom cursor element - needs to be here in the body, not in the CSS -->
+    <!-- Custom cursor element -->
     <div class="custom-cursor" id="custom-cursor"></div>
     
     <!-- Left Sidebar (Static) -->
@@ -54,27 +18,25 @@
         <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
     </div>
 
-    <!-- Rest of your HTML remains unchanged -->
-    <!-- ... -->
+    <!-- Resize Handle -->
+    <div class="resize-handle" id="resize-handle"></div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add custom cursor functionality
-            const cursor = document.getElementById('custom-cursor');
-            
-            document.addEventListener('mousemove', function(e) {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-            });
-            
-            // Rest of your JavaScript remains unchanged
-            function adjustGridSizes() {
-                // ... your existing code
-            }
-            
-            adjustGridSizes();
-            window.addEventListener('resize', adjustGridSizes);
-        });
-    </script>
+    <!-- Right Content Area with Fixed Grid -->
+    <div class="content-area" id="content-area">
+        <!-- Scrollable Gallery Grid -->
+        <div class="gallery-grid" id="gallery-grid">
+            <div class="gallery-item" data-id="1"><a href="project1.html" title="Project 1">1</a></div>
+            <div class="gallery-item" data-id="2"><a href="project2.html" title="Project 2">2</a></div>
+            <div class="gallery-item" data-id="3"><a href="project3.html" title="Project 3">3</a></div>
+            <div class="gallery-item" data-id="4"><a href="project4.html" title="Project 4">4</a></div>
+            <div class="gallery-item" data-id="5"><a href="project5.html" title="Project 5">5</a></div>
+            <div class="gallery-item" data-id="6"><a href="project6.html" title="Project 6">6</a></div>
+            <div class="gallery-item" data-id="7"><a href="project7.html" title="Project 7">7</a></div>
+            <div class="gallery-item" data-id="8"><a href="project8.html" title="Project 8">8</a></div>
+            <div class="gallery-item" data-id="9"><a href="project9.html" title="Project 9">9</a></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

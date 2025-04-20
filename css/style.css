@@ -13,7 +13,6 @@ body {
     cursor: none;
 }
 
-
 a, .gallery-item {
     cursor: none; /* Hide default cursor on clickable elements too */
 }
@@ -30,6 +29,7 @@ a, .gallery-item {
     z-index: 9999; /* Make sure it's always on top */
     transform: translate(-50%, -50%); /* Center the cursor */
 }
+
 /* Static Left Panel */
 .sidebar {
     height: 100%;
@@ -41,6 +41,8 @@ a, .gallery-item {
     left: 0;
     top: 0;
     bottom: 0;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    z-index: 100;
 }
 
 .sidebar h1 {
@@ -88,7 +90,7 @@ a, .gallery-item {
     background-position: 0 0;
 }
 
-/* 3x3 Gallery Grid */
+/* Gallery Grid */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -105,6 +107,25 @@ a, .gallery-item {
     position: relative;
     border: 1px solid #000;
     background-color: white;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.gallery-item a {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: #333;
+    font-size: 2rem;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
 }
 
 .gallery-item img {
@@ -114,7 +135,7 @@ a, .gallery-item {
     display: block;
 }
 
-/* Add sample placeholder backgrounds to visualize items */
+/* Add white backgrounds to all items */
 .gallery-item:nth-child(1) { background-color: #ffffff; }
 .gallery-item:nth-child(2) { background-color: #ffffff; }
 .gallery-item:nth-child(3) { background-color: #ffffff; }
@@ -124,3 +145,27 @@ a, .gallery-item {
 .gallery-item:nth-child(7) { background-color: #ffffff; }
 .gallery-item:nth-child(8) { background-color: #ffffff; }
 .gallery-item:nth-child(9) { background-color: #ffffff; }
+
+/* Add text/numbers to the gallery items to make them more identifiable */
+.gallery-item::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        padding: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px;
+    }
+}

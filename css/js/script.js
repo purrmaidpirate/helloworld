@@ -2,24 +2,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const resizeHandle = document.getElementById('resize-handle');
     const sidebar = document.getElementById('sidebar');
     const contentArea = document.getElementById('content-area');
+    const cursor = document.getElementById('custom-cursor');
     let isResizing = false;
-    // Custom cursor functionality
-const cursor = document.getElementById('custom-cursor');
-
-document.addEventListener('mousemove', function(e) {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-});
     
-    // Mouse events for desktop
-    resizeHandle.addEventListener('mousedown', function(e) {
-        isResizing = true;
-        resizeHandle.classList.add('active');
-        document.body.style.cursor = 'col-resize';
-        e.preventDefault();
-    });
-    
+    // Combined mousemove handler for both cursor and resizing
     document.addEventListener('mousemove', function(e) {
+        // Update custom cursor position
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+        
+        // Handle resizing if active
         if (!isResizing) return;
         
         const newWidth = e.clientX;
@@ -37,10 +29,16 @@ document.addEventListener('mousemove', function(e) {
         }
     });
     
+    // Mouse events for desktop
+    resizeHandle.addEventListener('mousedown', function(e) {
+        isResizing = true;
+        resizeHandle.classList.add('active');
+        e.preventDefault();
+    });
+    
     document.addEventListener('mouseup', function() {
         isResizing = false;
         resizeHandle.classList.remove('active');
-        document.body.style.cursor = 'default';
     });
     
     // Touch events for mobile
@@ -73,4 +71,7 @@ document.addEventListener('mousemove', function(e) {
         isResizing = false;
         resizeHandle.classList.remove('active');
     });
+    
+    // Ensure cursor visibility when page loads
+    cursor.style.opacity = 1;
 });

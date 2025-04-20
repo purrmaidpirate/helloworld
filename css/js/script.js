@@ -1,69 +1,31 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const resizeHandle = document.getElementById('resize-handle');
-    const sidebar = document.getElementById('sidebar');
-    const contentArea = document.getElementById('content-area');
-    let isResizing = false;
-    
-    // Mouse events for desktop
-    resizeHandle.addEventListener('mousedown', function(e) {
-        isResizing = true;
-        resizeHandle.classList.add('active');
-        document.body.style.cursor = 'col-resize';
-        e.preventDefault();
-    });
-    
-    document.addEventListener('mousemove', function(e) {
-        if (!isResizing) return;
+    // Handle responsive grid sizing
+    function adjustGridSizes() {
+        const contentArea = document.getElementById('content-area');
+        const contentWidth = contentArea.offsetWidth;
+        const gallery = document.getElementById('gallery-grid');
         
-        const newWidth = e.clientX;
-        
-        if (newWidth > 200 && newWidth < window.innerWidth * 0.7) {
-            // Update sidebar width
-            sidebar.style.width = newWidth + 'px';
-            
-            // Update resize handle position
-            resizeHandle.style.left = newWidth + 'px';
-            
-            // Update content area margin and width
-            contentArea.style.marginLeft = (newWidth + 10) + 'px';
-            contentArea.style.width = `calc(100% - ${newWidth + 10}px)`;
+        // Set minimum size based on available width
+        if (contentWidth < 600) {
+            // For very small screens, we might want to drop to 2 columns
+            gallery.style.gridTemplateColumns = 'repeat(2, 1fr)';
+        } else {
+            // Otherwise stick to 3 columns
+            gallery.style.gridTemplateColumns = 'repeat(3, 1fr)';
         }
-    });
-    
-    document.addEventListener('mouseup', function() {
-        isResizing = false;
-        resizeHandle.classList.remove('active');
-        document.body.style.cursor = 'default';
-    });
-    
-    // Touch events for mobile
-    resizeHandle.addEventListener('touchstart', function(e) {
-        isResizing = true;
-        resizeHandle.classList.add('active');
-        e.preventDefault();
-    });
-    
-    document.addEventListener('touchmove', function(e) {
-        if (!isResizing) return;
         
-        const touch = e.touches[0];
-        const newWidth = touch.clientX;
-        
-        if (newWidth > 200 && newWidth < window.innerWidth * 0.7) {
-            // Update sidebar width
-            sidebar.style.width = newWidth + 'px';
-            
-            // Update resize handle position
-            resizeHandle.style.left = newWidth + 'px';
-            
-            // Update content area margin and width
-            contentArea.style.marginLeft = (newWidth + 10) + 'px';
-            contentArea.style.width = `calc(100% - ${newWidth + 10}px)`;
-        }
-    });
+        // Calculate and set item size to ensure squares aren't too small
+        const items = document.querySelectorAll('.gallery-item');
+        items.forEach(item => {
+            // Set minimum height to ensure they're not too small
+            const minSize = Math.max(200, contentWidth / 4);
+            item.style.minHeight = minSize + 'px';
+        });
+    }
     
-    document.addEventListener('touchend', function() {
-        isResizing = false;
-        resizeHandle.classList.remove('active');
-    });
+    // Initial adjustment
+    adjustGridSizes();
+    
+    // Adjust on window resize
+    window.addEventListener('resize', adjustGridSizes);
 });
